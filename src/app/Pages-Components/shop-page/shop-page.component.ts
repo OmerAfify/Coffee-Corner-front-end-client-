@@ -21,7 +21,14 @@ export class ShopPageComponent implements OnInit {
   filterObject:IFilterObject = {
    categoryId : 0,
    brandId : 0,
+   sortBy: 'name',
   }
+
+  sortOptions=[
+    {name:'alphabetical', value:'name'},
+    {name:'Price: High to Low', value:'Price:H_to_L'},
+    {name:'Price: Low to High', value:'Price:L_to_H'},
+  ]
 
 
 
@@ -73,5 +80,9 @@ onBrandIdSelected(brandId:number){
     this.getProductsFiltered(this.filterObject);
   }
 
-
+  OnSortChange(value:string){
+    this.filterObject.sortBy =value;
+    this.getProductsFiltered(this.filterObject);
+  
+  }
 }
