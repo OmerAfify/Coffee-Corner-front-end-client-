@@ -21,13 +21,14 @@ export class ShopPageComponent implements OnInit {
   filterObject:IFilterObject = {
    categoryId : 0,
    brandId : 0,
-   sortBy: 'name',
+   sortBy: 'nameAsc',
   }
 
   sortOptions=[
-    {name:'alphabetical', value:'name'},
-    {name:'Price: High to Low', value:'Price:H_to_L'},
-    {name:'Price: Low to High', value:'Price:L_to_H'},
+    {name:'a to z', value:'nameAsc'},
+    {name:'z to a', value:'nameDsc'},
+    {name:'Price: Low to High', value:'priceAsc'},
+    {name:'Price: High to Low', value:'priceDsc'},
   ]
 
 
