@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBrand } from 'src/app/shared/Interfaces/IBrand';
 import { ICategory } from 'src/app/shared/Interfaces/ICategory';
+import { IFilterObject } from 'src/app/shared/Interfaces/IFilterObject';
 import { IProduct } from 'src/app/shared/Interfaces/IProduct';
 import { BrandService } from 'src/app/shared/Services/BrandService';
 import { CategoryService } from 'src/app/shared/Services/CategoryService';
@@ -17,8 +18,11 @@ export class ShopPageComponent implements OnInit {
   categoriesList : ICategory[]
   brandsList : IBrand[]
 
-  categoryIdSelected = 0;
-  brandIdSelected = 0;
+  filterObject:IFilterObject = {
+   categoryId : 0,
+   brandId : 0,
+  }
+
 
 
   constructor(private _productService :ProductService,
@@ -28,44 +32,20 @@ export class ShopPageComponent implements OnInit {
   }
   
     ngOnInit(): void {
-      this.getProducts(this.brandIdSelected, this.categoryIdSelected);
+     
+      this.getProductsFiltered(this.filterObject);
+
       this.getBrands();
       this.getCategories();
 
     }
 
 
-getProducts(productBrandId?:number, categoryId?:number ){
-  
-  if(categoryId==0 && productBrandId==0){
-    this._productService.getAllProducts().subscribe((data:IProduct[])=>{
-      this.productsList = data;  
-    }, error=>{ console.log(error)})
 
-    return;
-  }
-  
-  if(categoryId!=0 && productBrandId!=0){
-    this._productService.getProductByBrandAndCategoryId(productBrandId,categoryId).subscribe((data:IProduct[])=>{
-      this.productsList = data;  
-    }, error=>{ console.log(error)})
-  return;
-  } 
-
-  if(categoryId!=0){
-    this._productService.getProductsByCategoryId(categoryId).subscribe((data:IProduct[])=>{
-      this.productsList = data;  
-    }, error=>{ console.log(error)})
-  return;
-  } 
-
-  if(productBrandId!=0){
-    this._productService.getProductsByBrandId(productBrandId).subscribe((data:IProduct[])=>{
-      this.productsList = data;  
-    }, error=>{ console.log(error)})
-  return;
-  } 
-
+getProductsFiltered(filterObject:IFilterObject){
+this._productService.getProductsFiltered(filterObject).subscribe(
+  (data)=>{this.productsList = data}, error=>{console.log(error)}
+);
 }
 
 getCategories(){
@@ -84,16 +64,14 @@ getBrands(){
 
 
 onBrandIdSelected(brandId:number){
-    this.brandIdSelected = brandId;
-    this.getProducts(this.brandIdSelected, this.categoryIdSelected);
+    this.filterObject.brandId = brandId;
+    this.getProductsFiltered(this.filterObject);
   }
   
   onCategoryIdSelected(categoryId:number){
-    this.categoryIdSelected = categoryId;
-    this.getProducts(this.brandIdSelected, this.categoryIdSelected);
+    this.filterObject.categoryId = categoryId;
+    this.getProductsFiltered(this.filterObject);
   }
-
-
 
 
 }
