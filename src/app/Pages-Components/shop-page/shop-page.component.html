@@ -10,19 +10,22 @@
 
             <h5 class="text-warning ml-3">Type/Category</h5>
             <ul class="list-group mb-3">
-                <li class="list-group-item active">A</li>
-                <li class="list-group-item">B</li>
-                <li class="list-group-item">C</li>
-                <li class="list-group-item">D</li>
-                <li class="list-group-item">E</li>
+
+                <li *ngFor="let category of categoriesList" class="list-group-item" 
+                (click)="onCategoryIdSelected(category.id)"
+    
+                [class.active]="category.id===categoryIdSelected"
+                 
+                >{{category.categoryName}}</li>
+                
             </ul>
-            <h5 class="text-warning ml-3">Types</h5>
+            <h5 class="text-warning ml-3">Brand</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item active">AA</li>
-                <li class="list-group-item">BB</li>
-                <li class="list-group-item">CC</li>
-                <li class="list-group-item">DD</li>
-                <li class="list-group-item">EE</li>
+              <li *ngFor="let brand of brandsList" 
+                   class="list-group-item"
+                   [class.active]="brand.id===brandIdSelected"
+                  (click)="onBrandIdSelected(brand.id)">{{brand.productBrandName}}</li>
+         
 
             </ul>
         </section>

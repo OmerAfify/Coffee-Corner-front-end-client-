@@ -16,6 +16,18 @@ export class ProductService {
         return this.http.get<IProduct[]>(this.baseUrl+"GetProducts")
     }
 
+    getProductsByCategoryId(categoryId:number):Observable<IProduct[]> {
+        return this.http.get<IProduct[]>(this.baseUrl+"GetProductByCategoryId/"+categoryId)
+    }
+
+    getProductsByBrandId(productBrandId:number):Observable<IProduct[]> {
+        return this.http.get<IProduct[]>(this.baseUrl+"GetProductByBrandId/"+productBrandId)
+    }
+
+    getProductByBrandAndCategoryId(productBrandId:number, categoryId:number):Observable<IProduct[]> {
+        return this.http.get<IProduct[]>(this.baseUrl+"GetProductByBrandAndCategoryId/"+productBrandId+"/"+categoryId)
+    }
+
     
     }
 
