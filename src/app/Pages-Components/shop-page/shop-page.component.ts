@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBrand } from 'src/app/shared/Interfaces/IBrand';
 import { ICategory } from 'src/app/shared/Interfaces/ICategory';
-import { IFilterObject } from 'src/app/shared/Interfaces/IFilterObject';
 import { IProduct } from 'src/app/shared/Interfaces/IProduct';
+import { FilterObject } from 'src/app/shared/Models/FilterObject';
 import { BrandService } from 'src/app/shared/Services/BrandService';
 import { CategoryService } from 'src/app/shared/Services/CategoryService';
 import { ProductService } from 'src/app/shared/Services/ProductService';
@@ -18,11 +18,9 @@ export class ShopPageComponent implements OnInit {
   categoriesList : ICategory[]
   brandsList : IBrand[]
 
-  filterObject:IFilterObject = {
-   categoryId : 0,
-   brandId : 0,
-   sortBy: 'nameAsc',
-  }
+  totalProductsCount:number
+
+  filterObject:FilterObject = new FilterObject();
 
   sortOptions=[
     {name:'a to z', value:'nameAsc'},
@@ -41,49 +39,58 @@ export class ShopPageComponent implements OnInit {
   
     ngOnInit(): void {
      
-      this.getProductsFiltered(this.filterObject);
-
-      this.getBrands();
-      this.getCategories();
+      this.GetProductsFiltered(this.filterObject);
+      this.GetBrands();
+      this.GetCategories();
 
     }
 
 
+//subscribing to observables
 
-getProductsFiltered(filterObject:IFilterObject){
+GetProductsFiltered(filterObject:FilterObject){
+
 this._productService.getProductsFiltered(filterObject).subscribe(
-  (data)=>{this.productsList = data}, error=>{console.log(error)}
+  (data)=>{this.productsList = data.data;
+  this.totalProductsCount = data.count;
+  }, error=>{console.log(error)}
 );
 }
 
-getCategories(){
+GetCategories(){
   this._categoryService.getAllCategories().subscribe((data:ICategory[])=>{
       
     this.categoriesList = [{id:0 , categoryName: "All"}, ...data];  
   }, error=>{ console.log(error)})
 }
 
-getBrands(){
+GetBrands(){
   this._brandService.getAllBrands().subscribe((data:IBrand[])=>{
     this.brandsList = [{id:0 , productBrandName: "All"}, ...data];  
   }, error=>{ console.log(error)})
 }
 
 
+//Methods for UI Event Listening
 
-onBrandIdSelected(brandId:number){
+  OnBrandIdSelected(brandId:number){
     this.filterObject.brandId = brandId;
-    this.getProductsFiltered(this.filterObject);
+    this.GetProductsFiltered(this.filterObject);
   }
   
-  onCategoryIdSelected(categoryId:number){
+  OnCategoryIdSelected(categoryId:number){
     this.filterObject.categoryId = categoryId;
-    this.getProductsFiltered(this.filterObject);
+    this.GetProductsFiltered(this.filterObject);
   }
 
   OnSortChange(value:string){
     this.filterObject.sortBy =value;
-    this.getProductsFiltered(this.filterObject);
-  
+    this.GetProductsFiltered(this.filterObject);
   }
+   
+  OnPaginationChange(event:any){
+this.filterObject.pageNumber = event.page;
+this.GetProductsFiltered(this.filterObject)
+  }  
+  
 }

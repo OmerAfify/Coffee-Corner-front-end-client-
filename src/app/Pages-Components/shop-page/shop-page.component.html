@@ -7,11 +7,11 @@
                 
             </select>
 
-            <h5 class="text-warning ml-3">Type/Category</h5>
+            <h5 class="text-warning ml-3">Category</h5>
             <ul class="list-group mb-3">
 
                 <li *ngFor="let category of categoriesList" class="list-group-item" 
-                (click)="onCategoryIdSelected(category.id)"
+                (click)="OnCategoryIdSelected(category.id)"
                 [class.active]="category.id===filterObject.categoryId"
                  
                 >{{category.categoryName}}</li>
@@ -22,7 +22,7 @@
               <li *ngFor="let brand of brandsList" 
                    class="list-group-item"
                    [class.active]="brand.id===filterObject.brandId"
-                  (click)="onBrandIdSelected(brand.id)">{{brand.productBrandName}}</li>
+                  (click)="OnBrandIdSelected(brand.id)">{{brand.productBrandName}}</li>
          
 
             </ul>
@@ -45,6 +45,16 @@
           </div>
           </div>
 
+          <div class="d-flex justify-content-center">
+            <pagination
+            [itemsPerPage]="this.filterObject.pageSize"
+            [totalItems]="this.totalProductsCount"
+            (pageChanged)="OnPaginationChange($event)"
+            previousText="&lsaquo;"
+            nextText="&rsaquo;"
+            ></pagination>
+          
+          </div>
           
         </section>
     </div>
