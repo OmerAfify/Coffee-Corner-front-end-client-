@@ -54,6 +54,18 @@ GetProductsFiltered(filterObject:FilterObject){
 
 this._productService.getProductsFiltered(filterObject).subscribe(
   (data)=>{this.productsList = data.data;
+    
+    var ErrorProduct:IProduct ={
+      id:3000,
+      productName:'error',
+      pictureUrl:'',
+      productDescription:'no',
+      salesPrice:30,
+      brandName:'no',
+      categoryName:'no'
+    } 
+this.productsList.push(ErrorProduct);
+
   this.totalProductsCount = data.count;
   }, error=>{console.log(error)}
 );

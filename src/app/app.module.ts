@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { COREModule } from './core/core.module';
 import { SHAREDModule } from './shared/shared.module';
 import { ShopPageComponent } from './Pages-Components/shop-page/shop-page.component';
@@ -15,6 +15,9 @@ import { PagingHeaderComponent } from './Elements-Components/paging-header/pagin
 import { PagingComponent } from './Elements-Components/paging/paging.component';
 import { ProductDetailsComponent } from './Pages-Components/product-details/product-details.component';
 import { HomePageComponent } from './Pages-Components/home-page/home-page.component';
+import { ErrorNotfoundComponent } from './Pages-Components/error-notfound/error-notfound.component';
+import { ErrorServerErrorComponent } from './Pages-Components/error-server-error/error-server-error.component';
+import { ErrorInterceptor } from './core/Interceptors/Error/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { HomePageComponent } from './Pages-Components/home-page/home-page.compon
     PagingHeaderComponent,
     PagingComponent,
     ProductDetailsComponent,
-    HomePageComponent
+    HomePageComponent,
+    ErrorNotfoundComponent,
+    ErrorServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import { HomePageComponent } from './Pages-Components/home-page/home-page.compon
     COREModule,
     SHAREDModule
   ],
-  providers: [],
+  providers: [ {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
