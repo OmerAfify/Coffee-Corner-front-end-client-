@@ -22,6 +22,8 @@ export class ShopPageComponent implements OnInit {
 
   filterObject:FilterObject = new FilterObject();
 
+  
+
   sortOptions=[
     {name:'a to z', value:'nameAsc'},
     {name:'z to a', value:'nameDsc'},
@@ -75,11 +77,15 @@ GetBrands(){
 
   OnBrandIdSelected(brandId:number){
     this.filterObject.brandId = brandId;
+    this.filterObject.pageNumber=1;
+    this.filterObject.pageSize=6;
     this.GetProductsFiltered(this.filterObject);
   }
   
   OnCategoryIdSelected(categoryId:number){
     this.filterObject.categoryId = categoryId;
+    this.filterObject.pageNumber=1;
+    this.filterObject.pageSize=6;
     this.GetProductsFiltered(this.filterObject);
   }
 
@@ -88,9 +94,14 @@ GetBrands(){
     this.GetProductsFiltered(this.filterObject);
   }
    
-  OnPaginationChange(event:any){
-this.filterObject.pageNumber = event.page;
-this.GetProductsFiltered(this.filterObject)
+OnPaginationChange(event:any){
+if(this.filterObject.pageNumber!==event){
+  this.filterObject.pageNumber = event;
+  console.log("page value is changed to : "+event)
+  this.GetProductsFiltered(this.filterObject)
+  
+}
+
   }  
   
 }

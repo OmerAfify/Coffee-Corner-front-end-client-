@@ -18,6 +18,10 @@ export class ProductService {
         return this.http.get<IProduct[]>(this.baseUrl+"GetProducts")
     }
 
+    getProductById(id:number):Observable<IProduct> {
+        return this.http.get<IProduct>(this.baseUrl+"GetProduct/"+id)
+    }
+
 
     getProductsByCategoryId(categoryId:number):Observable<IProduct[]> {
         return this.http.get<IProduct[]>(this.baseUrl+"GetProductByCategoryId/"+categoryId)

@@ -1,0 +1,12 @@
+<header>
+  <span>Showing <strong>
+    {{ (PageNumber -1)*PageSize + 1  }}
+   -
+    {{ ( ( (PageSize)*(PageNumber) ) > totalItems)?
+      totalItems
+      :
+      (PageNumber)*(PageSize)
+      
+    }} 
+</strong> out of <strong>{{totalItems}}</strong> Results</span>
+</header>

@@ -4,13 +4,13 @@
          alt="{{productItem.productName}}" >
     
         <div class="card-body d-flex flex-column">
-        <a hreh="#">
+        <a  routerLink="/Shop/{{productItem.id}}">
             <h6 class="text-uppercase">{{productItem.productName}}</h6>
         </a>
         <span class="mb-2">{{productItem.salesPrice | currency}}</span>
           <div class="btn-group mt-auto">
             <button type="button" class="btn  btn-outline-secondary fa fa-shopping-cart mr-2"></button>
-            <button type="button" class="btn  btn-outline-secondary">View</button>
+            <a type="button" class="btn  btn-outline-secondary" routerLink="/Shop/{{productItem.id}}">View</a>
           </div>
 
        
