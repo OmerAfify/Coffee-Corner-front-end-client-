@@ -1,0 +1,93 @@
+<app-page-header ></app-page-header>
+
+<div *ngIf="shoppingCart==null">
+    <p>no items in your Cart.</p>
+</div>
+<div *ngIf="shoppingCart!=null">
+<div class="container mt-5">
+    <div *ngIf="shoppingCart==null">
+        <p>There are no items in your basket</p>
+    </div>
+
+    <ng-container *ngIf="shoppingCart!=null || shoppingCart.items!=null || shoppingCart.items.length!=0">
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-light text-uppercase">
+                            <tr>
+                                <th><div class="py-2">Product</div></th>
+                                <th><div class="py-2">Price</div></th>
+                                <th><div class="py-2">Quantity</div></th>
+                                <th><div class="py-2">Total</div></th>
+                                <th><div class="py-2">Remove</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of shoppingCart.items"> <!--repeat here-->
+                                <th>
+                                    <div class="p-2 d-inline-block">
+                                        <img src="{{item.pictureUrl}}" 
+                                            alt="image" 
+                                            class="img-fluid"
+                                            style="max-height: 50px;"
+                                        >
+                                        <div class="ms-3 d-inline-block align-middle">
+                                            <h5 class="mb-0">
+                                                <a class="text-dark text-decoration-none">
+                                                {{item.productName}}
+                                                </a>
+                                            </h5>
+                                            <span class="text-muted fst-italic">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="align-middle"><strong>{{ item.price | currency}}</strong></td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa fa-minus-circle text-warning me-2" 
+                                            style="cursor: pointer; font-size: 2em;"
+                                            (click)="removeFromCart(item.id,1)"
+                                            
+                                        ></i>
+                                        <strong style="font-size: 1.5em;">{{item.qty}}</strong>
+                                     
+                                        <i class="fa fa-plus-circle text-warning mx-2" 
+                                            style="cursor: pointer; font-size: 2em;"
+                                            (click)="addToCart(item,1)"
+                                       ></i>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>{{item.price * item.qty}}</strong></td>
+                                <td class="align-middle">
+                                    <a class="text-danger">
+                                        <i 
+                                           class="fa fa-trash" 
+                                           (click)="removeFromCart(item.id,item.qty)"
+                                            style="font-size: 2em; cursor: pointer;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 offset-6">
+                    <app-order-summary></app-order-summary>
+                    <div class="d-grid">
+                        <a class="btn btn-outline-primary py-2">
+                            Proceed to checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+
+</div>
+
+</div>

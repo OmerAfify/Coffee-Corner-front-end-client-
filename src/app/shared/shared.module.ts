@@ -4,6 +4,7 @@ import { ProductService } from './Services/ProductService';
 import { BrandService } from './Services/BrandService';
 import { CategoryService } from './Services/CategoryService';
 import {PaginationModule} from 'ngx-bootstrap/pagination'
+import { ShoppingCartService } from './Services/ShoppingCartService';
 
 @NgModule({
   declarations: [],
@@ -11,7 +12,7 @@ import {PaginationModule} from 'ngx-bootstrap/pagination'
     CommonModule,
     PaginationModule.forRoot()
   ],
-  providers:[ProductService, BrandService, CategoryService],
+  providers:[ProductService, BrandService, CategoryService, ShoppingCartService],
   exports: [PaginationModule]
 })
 export class SHAREDModule { }

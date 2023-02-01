@@ -18,6 +18,10 @@ import { HomePageComponent } from './Pages-Components/home-page/home-page.compon
 import { ErrorNotfoundComponent } from './Pages-Components/error-notfound/error-notfound.component';
 import { ErrorServerErrorComponent } from './Pages-Components/error-server-error/error-server-error.component';
 import { ErrorInterceptor } from './core/Interceptors/Error/error.interceptor';
+import { PageHeaderComponent } from './Elements-Components/page-header/page-header.component';
+import { ShoppingCartComponent } from './Pages-Components/shopping-cart/shopping-cart.component';
+import { OrderSummaryComponent } from './Elements-Components/order-summary/order-summary.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { ErrorInterceptor } from './core/Interceptors/Error/error.interceptor';
     ProductDetailsComponent,
     HomePageComponent,
     ErrorNotfoundComponent,
-    ErrorServerErrorComponent
+    ErrorServerErrorComponent,
+    PageHeaderComponent,
+    ShoppingCartComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +44,10 @@ import { ErrorInterceptor } from './core/Interceptors/Error/error.interceptor';
     BrowserAnimationsModule,
     HttpClientModule, 
     COREModule,
-    SHAREDModule
+    SHAREDModule,
   ],
-  providers: [ {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true} ],
+  providers: [ {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
+ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

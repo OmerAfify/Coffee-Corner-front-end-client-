@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IProduct } from 'src/app/shared/Interfaces/IProduct';
 import { ProductService } from 'src/app/shared/Services/ProductService';
+import { ShoppingCartService } from 'src/app/shared/Services/ShoppingCartService';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,9 @@ export class ProductDetailsComponent implements OnInit {
   product:IProduct;
   productId:number;
 
-  constructor(private route:ActivatedRoute,private _productsService:ProductService) { }
+  constructor(private route:ActivatedRoute,
+    private _productsService:ProductService,
+    private _shoppingCartService:ShoppingCartService) { }
 
   ngOnInit(): void {
 
@@ -23,13 +26,20 @@ export class ProductDetailsComponent implements OnInit {
 
     this.getProduct();
 
-
   }
 
   getProduct(){
     this._productsService.getProductById(this.productId).subscribe((data)=>{
 this.product = data;
     })
+  }
+
+  addToCart(){
+
+   if(this.product)
+    this._shoppingCartService.addItemToCart(this.product);
+
+    console.log('added');
   }
 
 }

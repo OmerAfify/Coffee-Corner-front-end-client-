@@ -19,7 +19,9 @@ export class ShopPageComponent implements OnInit {
   brandsList : IBrand[]
 
   totalProductsCount:number
-
+  title='Shop'
+  link='Shop/Here'
+  
   filterObject:FilterObject = new FilterObject();
 
   

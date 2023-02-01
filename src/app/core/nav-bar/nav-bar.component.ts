@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ShoppingCart } from 'src/app/shared/Models/ShoppingCart';
+import { ShoppingCartService } from 'src/app/shared/Services/ShoppingCartService';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  totalCartItems = 0;
 
-  ngOnInit(): void {
+  constructor(private shoppingCart:ShoppingCartService) { }
+
+ngOnInit(): void {
+  this.getShoppingCartTotalCount();
   }
+
+getShoppingCartTotalCount(){
+
+  this.shoppingCart.shoppingCartObservable$.subscribe((data:ShoppingCart)=>{
+
+    if(data==null)
+        this.totalCartItems = 0;
+    else{
+      this.totalCartItems = 0;
+         data.items.forEach(item => {
+          this.totalCartItems += item.qty;});
+        }
+     });
+  
+  
+
+}
+
 
 }
