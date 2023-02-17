@@ -21,7 +21,9 @@ import { ErrorInterceptor } from './core/Interceptors/Error/error.interceptor';
 import { PageHeaderComponent } from './Elements-Components/page-header/page-header.component';
 import { ShoppingCartComponent } from './Pages-Components/shopping-cart/shopping-cart.component';
 import { OrderSummaryComponent } from './Elements-Components/order-summary/order-summary.component';
-
+import { LoginComponent } from './Pages-Components/login/login.component';
+import { RegisterComponent } from './Pages-Components/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,16 @@ import { OrderSummaryComponent } from './Elements-Components/order-summary/order
     ErrorServerErrorComponent,
     PageHeaderComponent,
     ShoppingCartComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule, 
+    HttpClientModule,
+    ReactiveFormsModule, 
     COREModule,
     SHAREDModule,
   ],

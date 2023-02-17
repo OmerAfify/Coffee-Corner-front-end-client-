@@ -10,8 +10,18 @@
         <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
         <div class="cart-no">{{totalCartItems}}</div>
       </a>
-      <a class="btn btn-outline-secondary mr-2">Login</a>
-      <a class="btn btn-outline-secondary mr-3">Sign up</a>
+
+      <div *ngIf="currentUser==null">
+      <a routerLink="/Login" class="btn btn-outline-secondary mr-2">Login</a>
+      <a routerLink="/Register" class="btn btn-outline-secondary mr-3">Sign up</a>
+      </div>
+    
+      <div *ngIf="currentUser!=null">
+        <p>Welcome {{currentUser.name}} !</p>
+        <a (click)="onlogout()" class="btn btn-outline-secondary mr-2">Logout</a>
+        </div>
+      
+    
     </div>
 
   </div>

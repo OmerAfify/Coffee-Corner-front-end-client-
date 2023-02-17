@@ -3,12 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorNotfoundComponent } from './Pages-Components/error-notfound/error-notfound.component';
 import { ErrorServerErrorComponent } from './Pages-Components/error-server-error/error-server-error.component';
 import { HomePageComponent } from './Pages-Components/home-page/home-page.component';
+import { LoginComponent } from './Pages-Components/login/login.component';
 import { ProductDetailsComponent } from './Pages-Components/product-details/product-details.component';
+import { RegisterComponent } from './Pages-Components/register/register.component';
 import { ShopPageComponent } from './Pages-Components/shop-page/shop-page.component';
 import { ShoppingCartComponent } from './Pages-Components/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
 {path:'',component:HomePageComponent},
+
+{path:'Login',component:LoginComponent},
+{path:'Register',component:RegisterComponent},
 {path:'Shop',component:ShopPageComponent},
 {path:'Shop/:id',component:ProductDetailsComponent},
 {path:'ShoppingCart',component:ShoppingCartComponent},

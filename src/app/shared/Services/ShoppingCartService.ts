@@ -24,7 +24,6 @@ private _orderSummaryObservable = new BehaviorSubject<IOrderSummary | null>(null
 public orderSummaryObservable$ = this._orderSummaryObservable .asObservable();
 
 
-
 getShoppingCart(shoppingCartId:string){
 this.http.get<ShoppingCart>(this.baseUrl+"GetShoppingCartById?id="+shoppingCartId).subscribe(
 {next : shoppingCart =>{this._shoppingCartObservable.next(shoppingCart)
@@ -66,14 +65,6 @@ removeFromCart(itemId:number, qty:number=1){
 let shoppingCart = this.getCurrentShoppingCart();
 
 if(shoppingCart==null) return;
-
-// get item from the shopping cart
-// if item is not there. return 
-// if item is got using find method
-// reduce its qty. 
-//if qty of item <=0 . remove it from cart with filter method
-// if shopping cart lenth <0 . remove the whole cart from api, redis and set it back to null
-// set shoppingCart
 
 let itemToRemove = shoppingCart.items.find(i=>i.id===itemId);
 
@@ -130,7 +121,6 @@ if(shoppingCart.items.length <=0){
 return shoppingCartItems;
 
     }
-
 
 private setOrderSummary(shoppingCart:ShoppingCart){
 

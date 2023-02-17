@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './shared/Interfaces/IProduct';
+import { AccountService } from './shared/Services/account.service';
 import { ProductService } from './shared/Services/ProductService';
 import { ShoppingCartService } from './shared/Services/ShoppingCartService';
 
@@ -11,21 +12,35 @@ import { ShoppingCartService } from './shared/Services/ShoppingCartService';
 })
 export class AppComponent implements OnInit {
   
-  cardId : string;
+cardId : string;
+token : string;
 title:string = 'Coffee Corner';
 
 
   ngOnInit(): void {
-    this.cardId = localStorage.getItem("shoppingCartId")
-
-    if(this.cardId!=null){
-         this._shoppingCartService.getShoppingCart(this.cardId);
-       }
+   this.getCurrentCart();   
+   this.getCurrentUser(); 
+   
   }
  
-constructor(private _shoppingCartService:ShoppingCartService) {
+constructor(private _shoppingCartService:ShoppingCartService, private _accountService:AccountService) {
 }
 
+getCurrentCart(){
+  this.cardId = localStorage.getItem("shoppingCartId")
+
+  if(this.cardId!=null){
+       this._shoppingCartService.getShoppingCart(this.cardId);
+     }
+}
+
+getCurrentUser(){
+  this.token = localStorage.getItem("token");
+
+  if(this.token!=null){
+       this._accountService.loadCurrentUser(this.token);
+     }
+}
 
 
 }
