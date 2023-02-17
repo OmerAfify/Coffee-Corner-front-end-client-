@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/Guards/auth.guard';
 import { ErrorNotfoundComponent } from './Pages-Components/error-notfound/error-notfound.component';
 import { ErrorServerErrorComponent } from './Pages-Components/error-server-error/error-server-error.component';
 import { HomePageComponent } from './Pages-Components/home-page/home-page.component';
 import { LoginComponent } from './Pages-Components/login/login.component';
+import { OrderFullfillmentComponent } from './Pages-Components/order-fullfillment/order-fullfillment.component';
 import { ProductDetailsComponent } from './Pages-Components/product-details/product-details.component';
 import { RegisterComponent } from './Pages-Components/register/register.component';
 import { ShopPageComponent } from './Pages-Components/shop-page/shop-page.component';
@@ -17,6 +19,7 @@ const routes: Routes = [
 {path:'Shop',component:ShopPageComponent},
 {path:'Shop/:id',component:ProductDetailsComponent},
 {path:'ShoppingCart',component:ShoppingCartComponent},
+{path:'Checkout',canActivate:[AuthGuard],component:OrderFullfillmentComponent},
 {path:'NotFound',component:ErrorNotfoundComponent},
 {path:'ServerError',component:ErrorServerErrorComponent},
 {path:'**',redirectTo:"/",pathMatch:'full'}

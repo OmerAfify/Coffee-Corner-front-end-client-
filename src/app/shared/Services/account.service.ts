@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../Models/User';
 
@@ -10,20 +10,34 @@ import { User } from '../Models/User';
 })
 export class AccountService {
 
-  private _accountObservable = new BehaviorSubject<User|null>(null);
+  private _accountObservable = new ReplaySubject<User|null>(1);
   public accountObservable$ = this._accountObservable.asObservable();
 
   baseUrl = "https://localhost:44330/api/";
   
   constructor(private http:HttpClient, private route:Router) { }
 
-loadCurrentUser(token:string){
+loadCurrentUser(token:string | null){
+
+  if(token === null){
+    this._accountObservable.next(null);
+    return of(null);
+  }
+
+
 let headers = new HttpHeaders();
 headers = headers.set("Authorization",`Bearer ${token}`)
-this.http.get<User>(this.baseUrl+"GetCurrentUser",{headers} ).subscribe(user=>{
-this._accountObservable.next(user);
-localStorage.setItem("token",user.token);
-})
+return this.http.get<User>(this.baseUrl+"GetCurrentUser",{headers} )
+.pipe(map(user=>{ 
+  if(user){
+    this._accountObservable.next(user);
+    localStorage.setItem("token",user.token);
+    return user;
+  }else{
+    return null;
+  }
+ 
+}))
 
 
   }

@@ -36,10 +36,7 @@ getCurrentCart(){
 
 getCurrentUser(){
   this.token = localStorage.getItem("token");
-
-  if(this.token!=null){
-       this._accountService.loadCurrentUser(this.token);
-     }
+  this._accountService.loadCurrentUser(this.token).subscribe(); 
 }
 
 

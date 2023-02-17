@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { AccountService } from 'src/app/shared/Services/account.service';
 
@@ -20,15 +20,23 @@ export class LoginComponent implements OnInit {
       Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")])
   })
 
-  constructor(private accountService:AccountService, private router:Router) { }
+  returnUrl :string;
+
+  constructor(private accountService:AccountService, private router:Router, private activeRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-
+if(this.activeRoute.snapshot.queryParams["returnUrl"])
+this.returnUrl = this.activeRoute.snapshot.queryParams["returnUrl"];
+else
+this.returnUrl = "/Shop";
   }
 
 onlogin(){
   this.accountService.login(this.loginForm.value).subscribe(
-    ()=>{this.router.navigateByUrl("/Shop")},
+    ()=>{
+      this.router.navigateByUrl(this.returnUrl)
+    
+    },
    error=>{ 
     console.log(error);
     this.errorServerMessages = error.error.errors}

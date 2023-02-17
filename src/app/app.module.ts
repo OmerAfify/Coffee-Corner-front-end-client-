@@ -24,6 +24,7 @@ import { OrderSummaryComponent } from './Elements-Components/order-summary/order
 import { LoginComponent } from './Pages-Components/login/login.component';
 import { RegisterComponent } from './Pages-Components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrderFullfillmentComponent } from './Pages-Components/order-fullfillment/order-fullfillment.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShoppingCartComponent,
     OrderSummaryComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    OrderFullfillmentComponent
   ],
   imports: [
     BrowserModule,
