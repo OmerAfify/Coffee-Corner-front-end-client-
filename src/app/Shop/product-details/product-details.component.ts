@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IProduct } from 'src/app/shared/Interfaces/IProduct';
-import { ProductService } from 'src/app/shared/Services/ProductService';
-import { ShoppingCartService } from 'src/app/shared/Services/ShoppingCartService';
+import { ProductService } from 'src/app/core/Services/ProductService';
+import { ShoppingCartService } from 'src/app/core/Services/ShoppingCartService';
 
 @Component({
   selector: 'app-product-details',
@@ -36,10 +36,11 @@ this.product = data;
 
   addToCart(){
 
-   if(this.product)
+   if(this.product){
     this._shoppingCartService.addItemToCart(this.product);
+    console.log('added from productdetails');
+  }
 
-    console.log('added');
   }
 
 }

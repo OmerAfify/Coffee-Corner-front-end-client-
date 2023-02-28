@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IPaginationWithData } from "../Interfaces/IPaginationWithData";
-import { IProduct } from "../Interfaces/IProduct";
-import { FilterObject } from "../Models/FilterObject";
+import { IPaginationWithData } from "../../shared/Interfaces/IPaginationWithData";
+import { IProduct } from "../../shared/Interfaces/IProduct";
+import { FilterObject } from "../../shared/Models/FilterObject";
 
 @Injectable()
 export class ProductService {

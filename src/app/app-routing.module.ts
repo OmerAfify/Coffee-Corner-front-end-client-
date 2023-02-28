@@ -1,33 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/Guards/auth.guard';
-import { ErrorNotfoundComponent } from './Pages-Components/error-notfound/error-notfound.component';
-import { ErrorServerErrorComponent } from './Pages-Components/error-server-error/error-server-error.component';
-import { HomePageComponent } from './Pages-Components/home-page/home-page.component';
-import { LoginComponent } from './Pages-Components/login/login.component';
-import { OrderFullfillmentComponent } from './Pages-Components/order-fullfillment/order-fullfillment.component';
-import { ProductDetailsComponent } from './Pages-Components/product-details/product-details.component';
-import { RegisterComponent } from './Pages-Components/register/register.component';
-import { ShopPageComponent } from './Pages-Components/shop-page/shop-page.component';
-import { ShoppingCartComponent } from './Pages-Components/shopping-cart/shopping-cart.component';
+import { HomePageComponent } from './home/home-page/home-page.component';
+
 
 const routes: Routes = [
 {path:'',component:HomePageComponent},
-
-{path:'Login',component:LoginComponent},
-{path:'Register',component:RegisterComponent},
-{path:'Shop',component:ShopPageComponent},
-{path:'Shop/:id',component:ProductDetailsComponent},
-{path:'ShoppingCart',component:ShoppingCartComponent},
-{path:'Checkout',canActivate:[AuthGuard],component:OrderFullfillmentComponent},
-{path:'NotFound',component:ErrorNotfoundComponent},
-{path:'ServerError',component:ErrorServerErrorComponent},
-{path:'**',redirectTo:"/",pathMatch:'full'}
+//{path:"Shop", loadChildren:()=>import('./Shop/shop.module').then(m=>m.ShopModule)},
+{path:"Account", loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthenticationModule)}
+//{path:'**',redirectTo:"/",pathMatch:'full'}
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes) ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

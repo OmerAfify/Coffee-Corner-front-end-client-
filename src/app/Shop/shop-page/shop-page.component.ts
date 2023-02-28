@@ -3,9 +3,9 @@ import { IBrand } from 'src/app/shared/Interfaces/IBrand';
 import { ICategory } from 'src/app/shared/Interfaces/ICategory';
 import { IProduct } from 'src/app/shared/Interfaces/IProduct';
 import { FilterObject } from 'src/app/shared/Models/FilterObject';
-import { BrandService } from 'src/app/shared/Services/BrandService';
-import { CategoryService } from 'src/app/shared/Services/CategoryService';
-import { ProductService } from 'src/app/shared/Services/ProductService';
+import { BrandService } from 'src/app/core/Services/BrandService';
+import { CategoryService } from 'src/app/core/Services/CategoryService';
+import { ProductService } from 'src/app/core/Services/ProductService';
 
 @Component({
   selector: 'app-shop-page',

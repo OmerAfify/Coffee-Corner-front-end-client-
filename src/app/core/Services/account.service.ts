@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../Models/User';
+import { User } from '../../shared/Models/User';
 
 @Injectable({
   providedIn: 'root'

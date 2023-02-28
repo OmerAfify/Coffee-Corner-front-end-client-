@@ -1,10 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { ICartItem } from "../Interfaces/ICartItem";
-import { IOrderSummary } from "../Interfaces/IOrderSummary";
-import { IProduct } from "../Interfaces/IProduct";
-import { ShoppingCart } from "../Models/ShoppingCart";
+import { ICartItem } from "../../../app/shared/Interfaces/ICartItem";
+import { IOrderSummary } from "../../../app/shared/Interfaces/IOrderSummary";
+import { IProduct } from "../../../app/shared/Interfaces/IProduct";
+import { ShoppingCart } from "../../../app/shared/Models/ShoppingCart";
 
 @Injectable()
 export class ShoppingCartService {
@@ -26,7 +26,7 @@ public orderSummaryObservable$ = this._orderSummaryObservable .asObservable();
 
 getShoppingCart(shoppingCartId:string){
 this.http.get<ShoppingCart>(this.baseUrl+"GetShoppingCartById?id="+shoppingCartId).subscribe(
-{next : shoppingCart =>{this._shoppingCartObservable.next(shoppingCart)
+{next : shoppingCart =>{this._shoppingCartObservable.next(shoppingCart);
 this.setOrderSummary(shoppingCart);
 } }
 )}
@@ -48,8 +48,10 @@ getCurrentShoppingCart(){
    
     if ((item as ICartItem).brand ===undefined)
            item = this.mapProductToCartItem( (item as IProduct) );
-        
+     
+           //problem ----------
     var shoppingCart = this.getCurrentShoppingCart();
+    console.log(shoppingCart);
 
         if(shoppingCart==null){
             shoppingCart = this.createShoppingCart();
@@ -155,5 +157,4 @@ localStorage.removeItem("shoppingCartId")
 }
 
 }
-
 

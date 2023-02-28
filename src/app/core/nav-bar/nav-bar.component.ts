@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShoppingCart } from 'src/app/shared/Models/ShoppingCart';
 import { User } from 'src/app/shared/Models/User';
-import { AccountService } from 'src/app/shared/Services/account.service';
-import { ShoppingCartService } from 'src/app/shared/Services/ShoppingCartService';
+import { AccountService } from 'src/app/core/Services/account.service';
+import { ShoppingCartService } from 'src/app/core/Services/ShoppingCartService';
 
 @Component({
   selector: 'app-nav-bar',

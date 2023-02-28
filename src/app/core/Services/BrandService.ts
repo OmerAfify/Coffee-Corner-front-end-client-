@@ -1,23 +1,19 @@
-
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ICategory } from "../Interfaces/ICategory";
+import { IBrand } from "../../shared/Interfaces/IBrand";
 
 @Injectable()
-export class CategoryService {
+export class BrandService {
 
     baseUrl = "https://localhost:44330/api/";
     constructor(private http:HttpClient) {
   
     }
 
-    getAllCategories():Observable<ICategory[]> {
-        return this.http.get<ICategory[]>(this.baseUrl+"GetCategories")
+    getAllBrands():Observable<IBrand[]> {
+        return this.http.get<IBrand[]>(this.baseUrl+"GetProductBrands")
     }
 
-
-    
-    }
+ }
 

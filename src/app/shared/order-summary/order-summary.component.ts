@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrderSummary } from 'src/app/shared/Interfaces/IOrderSummary';
-import { ShoppingCartService } from 'src/app/shared/Services/ShoppingCartService';
+import { ShoppingCartService } from 'src/app/core/Services/ShoppingCartService';
 
 @Component({
   selector: 'app-order-summary',
